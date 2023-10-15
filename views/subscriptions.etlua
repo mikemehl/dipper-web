@@ -1,9 +1,5 @@
-<ul>
-  <% for i, v in ipairs(subs) do %>
-    <li>
-      <a href="subcriptions/<%= v.id %>">
-        <%= v.title %>
-      </a>
-    </li>
-    <% end %>
-</ul>
+<% for i, v in ipairs(subs) do %>
+  <div class="clickable" hx-target="#content", hx-get="/subscription/<%= v.id %>" hx-swap="innerHTML scroll:top">
+    <h2><%= v.title %></h2>
+  </div>
+<% end %>

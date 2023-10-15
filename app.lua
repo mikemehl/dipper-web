@@ -4,19 +4,33 @@ app:enable("etlua")
 
 local Model = require("lapis.db.model").Model
 local Podcasts = Model:extend("podcasts")
+local Episodes = Model:extend("episodes")
 
 app:get("/", function()
 	return { render = "index" }
 end)
 
-app:get("/subscriptions", function(self)
-	self.subs = Podcasts:select(nil, nil, { fields = "title, id" })
+app:get("subscriptions", "/subscriptions(/:sort)", function(self)
+	self.sort = self.params.sort or "title"
+	if self.sort == "title" then
+		self.subs = Podcasts:select("ORDER BY title", nil, { fields = "title, id" })
+	else
+		self.subs = Podcasts:select(nil, nil, { fields = "title, id" })
+	end
 	return { render = "subscriptions" }
 end)
 
-app:get("/subscriptions/:id", function(self)
-	self.pod = Podcasts:find(self.params.id)
-	return { render = "subscription" }
+app:get("subscription", "/subscription/:id(/:id_or_episodes)", function(self)
+	if self.params.id_or_episodes == "episodes" then
+		self.episodes = Episodes:select("WHERE podcast_id = ?", self.params.id)
+		return { render = "episodes" }
+	elseif type(self.params.id) == "number" then
+		self.episode = Episodes:find(self.params.id)
+		return { render = "episode" }
+	else
+		self.pod = Podcasts:find(self.params.id)
+		return { render = "subscription" }
+	end
 end)
 
 return app

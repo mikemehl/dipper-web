@@ -1,2 +1,52 @@
-<h1> Dipper </h1>
-<p> It's dippin', I guess. </p>
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Dipper">
+  <meta name="keywords" content="podcast, rss, client, api">
+  <title>///dipper///</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sakura.css/css/sakura.css" type="text/css">
+  <style>
+    div.clickable {
+      cursor: pointer;
+      border: 1px solid black;
+      padding: 10px;
+      margin: 10px;
+      border-radius: 5px;
+    }
+    div.clickable:hover {
+      background-color: #f1f1f1;
+    }
+    div#content {
+      overflow-y: auto;
+      max-height: 50vh;
+      min-height: 50vh;
+    }
+  </style>
+  <script src="https://unpkg.com/htmx.org@1.9.6" integrity="sha384-FhXw7b6AlE/jyjlZH5iHa/tTe9EpJ1Y55RjcgPbjeWMskSxZt1v9qkxLJWNJaGni" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <nav>
+    <h1>///dipper///</h1>
+      <button onclick="window.location.reload()">Home</button>
+      <button hx-target="#content" hx-get="/subscriptions" hx-trigger="click" hx-swap="innerHTML scroll:top">Podcasts</button>
+    </ul>
+  </nav>
+  <main>
+    <div class="container">
+      <div id="content">
+      </div>
+  </main>
+  <footer>
+    <audio controls id="player">
+      <source src="" type="audio/mpeg">
+      Your browser does not support the audio element.
+    </audio>
+    <p>dipper</p>
+  </footer>
+</body>
+
+</html>

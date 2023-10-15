@@ -1,4 +1,9 @@
-<h1><%= pod.id %></h1>
-<h2> Description: </h2>
-<p><%= pod.description %></p>
-<p><a href="<%= pod.link %>"><%= pod.link %></a>
+<h2><%= pod.title %></h2>
+<section>
+</section>
+<section>
+<h3> Description: </h3>
+  <p> <%= pod.description %> </p>
+  <p><a href="<%= pod.link %>"><%= pod.link %></a>
+  <p><button hx-target="#content" hx-get="<%= url_for("subscriptions")%>" hx-swap="innerHTML scroll:top">Back to list</button></p>
+</section>
