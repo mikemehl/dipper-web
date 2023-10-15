@@ -43,8 +43,8 @@ app:get("subscriptions", "/subscriptions(/:sort)", function(self)
   return { render = "subscriptions" }
 end)
 
-app:get("subscription", "/subscription/:id(/:id_or_episodes)", function(self)
-  if self.params.id_or_episodes == "episodes" then
+app:get("subscription", "/subscription/:id(/:id_or_action)", function(self)
+  if self.params.id_or_action == "episodes" then
     print("HELLO")
     self.episodes = Episodes:select("WHERE podcast_id = ?", self.params.id)
     return { render = "pod_episodes" }

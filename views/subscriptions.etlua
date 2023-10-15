@@ -1,3 +1,6 @@
+<button hx-get="/subscription/new" hx-swap="innerHTML scroll:top" hx-target="#content">New Subscription</button>
+<button hx-get="/subscriptions/manage" hx-swap="innerHTML scroll:top" hx-target="#content">Edit Subscriptions</button>
+<button hx-get="/subscriptions/refresh" hx-swap="innerHTML scroll:top" hx-target="#content">Refresh Subscriptions</button>
 <% for i, v in ipairs(subs) do %>
   <div class="clickable" hx-target="#content", hx-get="/subscription/<%= v.id %>" hx-swap="innerHTML scroll:top">
     <h2><%= v.title %></h2>
