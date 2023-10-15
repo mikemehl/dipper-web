@@ -1,0 +1,9 @@
+<ul>
+  <% for i, v in ipairs(subs) do %>
+    <li>
+      <a href="subcriptions/<%= v.id %>">
+        <%= v.title %>
+      </a>
+    </li>
+    <% end %>
+</ul>
