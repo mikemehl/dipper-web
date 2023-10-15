@@ -1,8 +1,18 @@
+<% if page < num_pages then %>
+  <button hx-get="/episodes/<%= page + 1 %>" hx-trigger="click" hx-target="#content" hx-swap="innerhtml"> Next Page </button>
+<% end %>
+<% if page > 1 then %>
+  <button hx-get="/episodes/<%= page - 1 %>" hx-trigger="click" hx-target="#content" hx-swap="innerhtml"> Previous Page </button>
+<% end %>
 <% for i,v in ipairs(episodes) do %>
   <div class="box">
   <h2> <%= v.title %> </h2>
   <h3> <%= v.pod_title %> </h3>
   <h3> <%= v.date %> </h3>
-  <p> <%= v.description %> </p>
+  <p> <%- v.description %> </p>
+    <form method="get" action="<%= v.enclosure_url %>">
+      <button hx-get="<%= url_for("audio", {id = v.id, download = false }) %>" hx-swap="outerHTML" hx-target="#player" >Play</button>
+      <button type="submit">Download</button>
+    </form>
   </div>
 <% end %>

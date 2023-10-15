@@ -44,12 +44,35 @@
     <button onclick="window.location.reload()">Home</button>
     <button hx-target="#content" hx-get="/subscriptions" hx-trigger="click"
       hx-swap="innerHTML scroll:top">Podcasts</button>
-    <button hx-target="#content" hx-get="/episodes" hx-trigger="click" hx-swap="innerHTML scroll:top">Episodes</button>
+    <button hx-target="#content" hx-get="/episodes/1" hx-trigger="click" hx-swap="innerHTML
+      scroll:top">Episodes</button>
   </nav>
   <main>
     <div class="container">
       <br>
-      <div id="content"> </div>
+      <div id="content">
+        <h2>Recent Episodes</h2>
+        <% for i,v in ipairs(episodes) do %>
+          <div class="box">
+            <h3>
+              <%= v.title %>
+            </h3>
+            <h4>
+              <%= v.pod_title %>
+            </h4>
+            <h4>
+              <%= v.date %>
+            </h4>
+            <p>
+              <%- v.description %>
+            </p>
+            <form method="get" action="<%= v.enclosure_url %>">
+              <button hx-get="/audio/<%= v.id %>" hx-swap="outerHTML" hx-target="#player">Play</button>
+              <button type="submit">Download</button>
+            </form>
+          </div>
+          <% end %>
+      </div>
       <figure id="#player">
         <audio controls id="player">
           <source src="" type="audio/mpeg">

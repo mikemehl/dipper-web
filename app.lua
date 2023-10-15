@@ -6,7 +6,30 @@ local Model = require("lapis.db.model").Model
 local Podcasts = Model:extend("podcasts")
 local Episodes = Model:extend("episodes")
 
-app:get("/", function()
+local function get_recent_episodes(page_limit)
+  return Episodes:paginated(
+    "INNER JOIN podcasts ON episodes.podcast_id = podcasts.id ORDER BY episodes.pub_date DESC",
+    nil,
+    {
+      fields = [[
+      episodes.id AS id, 
+      episodes.pub_date AS date, 
+      episodes.title AS title, 
+      episodes.description AS description, 
+      episodes.enclosure_url AS enclosure_url,
+      podcasts.id AS pod_id, 
+      podcasts.title AS pod_title
+      ]],
+      per_page = page_limit,
+    }
+  )
+end
+
+app:get("/", function(self)
+  local paginator = get_recent_episodes(10)
+  if paginator then
+    self.episodes = paginator:get_page(1)
+  end
   return { render = "index" }
 end)
 
@@ -34,18 +57,18 @@ app:get("subscription", "/subscription/:id(/:id_or_episodes)", function(self)
   end
 end)
 
-app:get("episodes", "/episodes", function(self)
-  self.episodes =
-    Episodes:select("INNER JOIN podcasts ON episodes.podcast_id = podcasts.id ORDER BY episodes.pub_date DESC", nil, {
-      fields = [[
-      episodes.id AS id, 
-      episodes.pub_date AS date, 
-      episodes.title AS title, 
-      episodes.description AS description, 
-      podcasts.id AS pod_id, 
-      podcasts.title AS pod_title
-      ]],
-    })
+app:get("episodes", "/episodes/:page", function(self)
+  local paginator = get_recent_episodes(50)
+  if paginator then
+    self.page = tonumber(self.params.page) or 1
+    self.num_pages = paginator:num_pages()
+    if self.page < 1 then
+      self.page = 1
+    elseif self.page >= self.num_pages then
+      self.page = self.episodes.num_pages()
+    end
+    self.episodes = paginator:get_page(self.page)
+  end
   return { render = "episodes" }
 end)
 

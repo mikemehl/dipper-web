@@ -1,5 +1,5 @@
 <figure id = "player" style="float: right">
-<audio controls>
+<audio controls autoplay>
 <source src="<%= episode.enclosure_url %>" type="audio/mpeg">
 Your browser does not support the audio element.
 </audio>
