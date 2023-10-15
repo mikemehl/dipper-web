@@ -44,6 +44,7 @@
     <button onclick="window.location.reload()">Home</button>
     <button hx-target="#content" hx-get="/subscriptions" hx-trigger="click"
       hx-swap="innerHTML scroll:top">Podcasts</button>
+    <button hx-target="#content" hx-get="/episodes" hx-trigger="click" hx-swap="innerHTML scroll:top">Episodes</button>
   </nav>
   <main>
     <div class="container">

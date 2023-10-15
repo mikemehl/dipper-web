@@ -1,0 +1,8 @@
+<% for i,v in ipairs(episodes) do %>
+  <div class="box">
+  <h2> <%= v.title %> </h2>
+  <h3> <%= v.pod_title %> </h3>
+  <h3> <%= v.date %> </h3>
+  <p> <%= v.description %> </p>
+  </div>
+<% end %>

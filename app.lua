@@ -34,6 +34,21 @@ app:get("subscription", "/subscription/:id(/:id_or_episodes)", function(self)
   end
 end)
 
+app:get("episodes", "/episodes", function(self)
+  self.episodes =
+    Episodes:select("INNER JOIN podcasts ON episodes.podcast_id = podcasts.id ORDER BY episodes.pub_date DESC", nil, {
+      fields = [[
+      episodes.id AS id, 
+      episodes.pub_date AS date, 
+      episodes.title AS title, 
+      episodes.description AS description, 
+      podcasts.id AS pod_id, 
+      podcasts.title AS pod_title
+      ]],
+    })
+  return { render = "episodes" }
+end)
+
 app:get("audio", "/audio/:id", function(self)
   self.episode = Episodes:find(self.params.id)
   return { render = "audio" }
