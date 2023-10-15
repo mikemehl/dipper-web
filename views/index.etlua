@@ -16,35 +16,45 @@
       margin: 10px;
       border-radius: 5px;
     }
+
     div.clickable:hover {
       background-color: #f1f1f1;
     }
+
     div#content {
       overflow-y: auto;
       max-height: 50vh;
       min-height: 50vh;
     }
+
+    #player {
+      float: right;
+    }
   </style>
-  <script src="https://unpkg.com/htmx.org@1.9.6" integrity="sha384-FhXw7b6AlE/jyjlZH5iHa/tTe9EpJ1Y55RjcgPbjeWMskSxZt1v9qkxLJWNJaGni" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/htmx.org@1.9.6"
+    integrity="sha384-FhXw7b6AlE/jyjlZH5iHa/tTe9EpJ1Y55RjcgPbjeWMskSxZt1v9qkxLJWNJaGni"
+    crossorigin="anonymous"></script>
 </head>
 
 <body>
   <nav>
     <h1>///dipper///</h1>
-      <button onclick="window.location.reload()">Home</button>
-      <button hx-target="#content" hx-get="/subscriptions" hx-trigger="click" hx-swap="innerHTML scroll:top">Podcasts</button>
-    </ul>
-  </nav>
-  <main>
-    <div class="container">
-      <div id="content">
-      </div>
-  </main>
-  <footer>
+    <button onclick="window.location.reload()">Home</button>
+    <button hx-target="#content" hx-get="/subscriptions" hx-trigger="click"
+      hx-swap="innerHTML scroll:top">Podcasts</button>
     <audio controls id="player">
       <source src="" type="audio/mpeg">
       Your browser does not support the audio element.
     </audio>
+    </ul>
+  </nav>
+  <main>
+    <div class="container">
+      <br>
+      <div id="content"> </div>
+    </div>
+  </main>
+  <footer>
     <p>dipper</p>
   </footer>
 </body>

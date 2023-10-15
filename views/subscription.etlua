@@ -5,5 +5,8 @@
 <h3> Description: </h3>
   <p> <%= pod.description %> </p>
   <p><a href="<%= pod.link %>"><%= pod.link %></a>
-  <p><button hx-target="#content" hx-get="<%= url_for("subscriptions")%>" hx-swap="innerHTML scroll:top">Back to list</button></p>
+  <p>
+    <button hx-target="#content" hx-get="<%= url_for("subscriptions")%>" hx-swap="innerHTML scroll:top">Back to list</button>
+    <button hx-target="#content" hx-get="<%= url_for("subscription", {id = pod.id, id_or_episodes = "episodes"})%>" hx-swap="innerHTML scroll:top">Episodes</button>
+  </p>
 </section>

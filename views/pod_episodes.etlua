@@ -1,0 +1,6 @@
+<% for i, v in ipairs(episodes) do %>
+  <div class="clickable" hx-target="#player" hx-get="<%= url_for("audio", {id = v.id }) %>" hx-swap="innerHTML">
+    <h2><%= v.title %></h2>
+    <p><%= v.description %></p>
+  </div>
+<% end %>
