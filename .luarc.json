@@ -1,0 +1,7 @@
+{
+  "workspace.checkThirdParty": true,
+  "runtime.version": "LuaJIT",
+  "workspace.library": [
+    "${3rd}/lapis/library"
+  ]
+}

@@ -1,6 +1,11 @@
 <% for i, v in ipairs(episodes) do %>
-  <div class="clickable" hx-target="#player" hx-get="<%= url_for("audio", {id = v.id }) %>" hx-swap="innerHTML">
+  <div class="box">
     <h2><%= v.title %></h2>
     <p><%= v.description %></p>
+    <form method="get" action="<%= v.enclosure_url %>">
+      <button hx-get="<%= url_for("audio", {id = v.id, download = false }) %>" hx-swap="outerHTML" hx-target="#player" >Play</button>
+      <button type="submit">Download</button>
+      <button hx-get="/subscription/<%= v.podcast_id%>" hx-swap="innerHTML" hx-target="#content">Back to Podcast</button>
+    </form>
   </div>
 <% end %>

@@ -9,6 +9,7 @@
   <title>///dipper///</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sakura.css/css/sakura.css" type="text/css">
   <style>
+    div.box,
     div.clickable {
       cursor: pointer;
       border: 1px solid black;
@@ -23,11 +24,12 @@
 
     div#content {
       overflow-y: auto;
-      max-height: 50vh;
-      min-height: 50vh;
+      max-height: 60vh;
+      min-height: 60vh;
     }
 
-    #player {
+    #player,
+    #player audio {
       float: right;
     }
   </style>
@@ -42,16 +44,17 @@
     <button onclick="window.location.reload()">Home</button>
     <button hx-target="#content" hx-get="/subscriptions" hx-trigger="click"
       hx-swap="innerHTML scroll:top">Podcasts</button>
-    <audio controls id="player">
-      <source src="" type="audio/mpeg">
-      Your browser does not support the audio element.
-    </audio>
-    </ul>
   </nav>
   <main>
     <div class="container">
       <br>
       <div id="content"> </div>
+      <figure id="#player">
+        <audio controls id="player">
+          <source src="" type="audio/mpeg">
+          Your browser does not support the audio element.
+        </audio>
+      </figure>
     </div>
   </main>
   <footer>
