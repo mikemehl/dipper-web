@@ -1,0 +1,4 @@
+<h1><%= pod.id %></h1>
+<h2> Description: </h2>
+<p><%= pod.description %></p>
+<p><a href="<%= pod.link %>"><%= pod.link %></a>
