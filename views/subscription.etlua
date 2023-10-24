@@ -7,7 +7,7 @@
   <p><a href="<%= pod.link %>"><%= pod.link %></a>
   <p>
     <button hx-target="#content" hx-get="<%= url_for("subscriptions")%>" hx-swap="innerHTML scroll:top" >Back to list</button>
-    <button hx-target="#content" hx-get="<%= url_for("subscription", {id = pod.id, id_or_episodes = "episodes"})%>" hx-swap="innerHTML scroll:top">Episodes</button>
+    <button hx-target="#content" hx-get="<%= url_for("subscription", {id = pod.id, id_or_action = "episodes"})%>" hx-swap="innerHTML scroll:top">Episodes</button>
     <button hx-get="/subscription/<%= pod.id %>/delete" hx-swap="innerHTML scroll:top" hx-target="content">Delete</button>
     <button hx-get="/subscription/<%= pod.id %>/refresh" hx-swap="innerHTML scroll:top" hx-target="content">Refresh</button>
   </p>
