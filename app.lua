@@ -57,7 +57,7 @@ app:get("subscription", "/subscription/:id(/:id_or_action)", function(self)
   end
 end)
 
-app:get("episodes", "/episodes/:page", function(self)
+app:get("episodes", "/episodes(/:page)", function(self)
   local paginator = get_recent_episodes(50)
   if paginator then
     self.page = tonumber(self.params.page) or 1
